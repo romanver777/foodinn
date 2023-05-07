@@ -1,0 +1,27 @@
+$width-l: 1200px;
+$width-m: 992px;
+$width-s: 768px;
+$width-xs: 576px;
+
+$text-color: #2c2c2c;
+$bg-color: #fff;
+$bg-border-color: #ddd;
+$bg-main-panel-color: #f4f3f0;
+$brand-color: #666666;
+$nav-color: rgba(102,102,102,0.7);
+$green: #47cf73;
+$green-light: rgba(71, 207, 115, 0.7);
+$whitesmoke: rgb(245, 245, 245);
+$gray-hover: #f4f3f0;
+$gray-active-warm: rgba(244, 243, 240);
+$gray-hover-light: rgba(211, 211, 211, 0.2);
+$gray: #dedcd7;
+$shadow: rgba(31, 22, 13, 0.1);
+
+$icons: (
+    "house": "../../style/icons/house.svg",
+    "dashboard": "../../style/icons/dashboard.svg",
+    "chartPie": "../../style/icons/chart-pie.svg",
+    "chartPipe": "../../style/icons/chart-pipe.svg",
+    "equaliser": "../../style/icons/equaliser.svg",
+);

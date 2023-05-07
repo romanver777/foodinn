@@ -1,0 +1,110 @@
+@import "../../style/scss/mixins.scss";
+
+.sidebar {
+  position: fixed;
+  width: 260px;
+  height: 100%;
+  border-right: 1px dotted $gray;
+  transition: 0.5s ease-in-out;
+  transform: translateX(0);
+
+  @media screen and (max-width: $width-m) {
+    transform: translateX(-260px);
+  }
+}
+.sidebar_open{
+    @media screen and (max-width: $width-m) {
+        transform: translateX(0);
+      }
+}
+.logo-wrapper {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-transform: uppercase;
+  background-color: $green-light;
+  color: white;
+  font-weight: 600;
+}
+.logo_border-round {
+  --mask: linear-gradient(#000 0 0) 50% / calc(100% - 9.25px)
+      calc(100% - 9.25px) no-repeat,
+    radial-gradient(farthest-side, #000 98%, #0000) 0 0/10px 10px round;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+.nav {
+  margin-top: 20px;
+}
+.list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.list-item {
+  margin: 0 15px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: $bg-main-panel-color;
+    cursor: pointer;
+    border-radius: 3px;
+    opacity: 1;
+    transition: 0.3s;
+  }
+}
+.list-item_active {
+  background-color: $gray;
+  border-radius: 3px;
+  opacity: 0.9;
+
+  &:hover {
+    background-color: $gray;
+    opacity: 0.9;
+  }
+}
+.link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $text-color;
+  font-size: 0.75rem;
+  position: relative;
+  padding-left: 55px;
+
+  &:before {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    opacity: 0.6;
+  }
+  @each $name, $url in $icons {
+    &_icon-#{$name} {
+        &::before {
+            background-image: url($url);
+          }
+    }
+  }
+}

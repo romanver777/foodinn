@@ -1,0 +1,12 @@
+@import "../../style/scss/mixins.scss";
+
+.footer{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $bg-main-panel-color;
+}
+.copyright{
+    font-size: 0.75rem;
+}
