@@ -1,0 +1,107 @@
+@import "../../style/scss/mixins.scss";
+
+.header {
+  position: fixed;
+  width: inherit;
+  min-height: 70px;
+  border-bottom: 1px solid $bg-border-color;
+  display: flex;
+  box-shadow: 0px 3px 10px -5px $shadow;
+  backdrop-filter: blur(3px);
+}
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  transform: translateX(0);
+
+  @media screen and (max-width: $width-m) {
+    transform: translateX(-20px);
+  }
+}
+.burger-btn {
+  display: none;
+
+  @media screen and (max-width: $width-m) {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      border-radius: 3px;
+      background-color: $gray-hover-light;
+      transition: 0.3s;
+    }
+  }
+}
+.burger-icon,
+.cross-icon {
+  width: 20px;
+  height: auto;
+  opacity: 0.4;
+}
+.cross-icon{
+    width: 18px;
+}
+.title {
+  display: inline-block;
+  font-size: 1rem;
+  opacity: 0.7;
+}
+.list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+}
+.list-item {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+
+  &:hover {
+    border-radius: 3px;
+    background-color: $gray-hover-light;
+    transition: 0.3s;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+.item-link {
+  display: flex;
+  width: inherit;
+  height: inherit;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+.icon {
+  width: 19px;
+  height: auto;
+  opacity: 0.5;
+}
+.icon_width {
+  width: 17px;
+}
