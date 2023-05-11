@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import Navbar from "../navbar/navbar";
@@ -11,6 +11,12 @@ import style from "./app.module.scss";
 const App = () => {
   const [isOpenSb, setIsOpenSb] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    if (window.innerWidth <= 992 && isOpenSb) {
+      setIsOpenSb(!isOpenSb);
+    }
+  }, [location]);
 
   const getPageName = (pathName: string) => {
     const route = routes.filter((item) => item.path === pathName);
