@@ -1,4 +1,4 @@
-import MainPage from "../components/mainpage/mainpage";
+import MainPage from "../components/main-page/main-page";
 import Profile from "../components/profile/profile";
 import Plan from "../components/plan/plan";
 import Stats from "../components/stats/stats";

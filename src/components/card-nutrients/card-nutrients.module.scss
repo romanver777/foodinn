@@ -1,0 +1,140 @@
+@import "../../style/scss/mixins.scss";
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  flex-grow: 1;
+  margin: 0 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  color: #252422;
+
+  &:first-child {
+    @media screen and (max-width: $width-s) {
+      margin-left: 0;
+    }
+  }
+  &:last-child {
+    @media screen and (max-width: $width-s) {
+      margin-right: 0;
+    }
+  }
+  @media screen and (max-width: $width-m) {
+    margin: 0 10px 20px;
+  }
+  @media screen and (max-width: $width-s) {
+    margin: 0 5px 20px;
+  }
+  @media screen and (max-width: $width-xs) {
+    margin: 0 3px 20px;
+  }
+}
+.wrapper {
+  width: 100%;
+  height: calc(100% - 30px);
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  @media screen and (max-width: $width-l) {
+    padding: 15px;
+  }
+  @media screen and (max-width: 1050px) {
+    padding: 10px;
+    height: calc(100% - 20px);
+  }
+  @media screen and (max-width: $width-m) {
+    padding: 15px;
+    height: calc(100% - 30px);
+  }
+  @media screen and (max-width: $width-s) {
+    flex-direction: column;
+    padding: 10px 10px 8px;
+    height: calc(100% - 18px);
+  }
+  @media screen and (max-width: 330px) {
+    padding: 10px 5px 8px;
+  }
+}
+.chart {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: $width-s) {
+    width: 100%;
+    height: 40%;
+  }
+  @media screen and (min-width: $width-l) {
+    width: 45%;
+  }
+}
+.body {
+  width: 60%;
+  text-align: right;
+  
+  @media screen and (min-width: $width-l) {
+    width: 50%;
+  }
+  @media screen and (max-width: $width-s) {
+    width: 100%;
+    height: 60%;
+    text-align: center;
+  }
+}
+.title {
+  font-size: 0.9375rem;
+  text-transform: capitalize;
+  color: #9a9a9a;
+  line-height: 1.4;
+  margin-bottom: 10px;
+
+  @media screen and (max-width: $width-l) {
+    font-size: 0.875rem;
+  }
+  @media screen and (max-width: $width-s) {
+    margin-bottom: 10px;
+  }
+  @media screen and (max-width: $width-xs) {
+    font-size: 0.75rem;
+  }
+  @media screen and (max-width: 330px) {
+    font-size: 0.625rem;
+  }
+}
+.quantity {
+  font-size: 2rem;
+  line-height: 1;
+
+  @each $current-color in $colors-nutrients {
+    $i: index($colors-nutrients, $current-color);
+    &_color#{$i} {
+      color: $current-color;
+    }
+  }
+
+  @media screen and (max-width: $width-l) {
+    font-size: 1.8rem;
+  }
+  @media screen and (max-width: $width-xs) {
+    font-size: 1.5rem;
+  }
+  @media screen and (max-width: 330px) {
+    font-size: 1.3rem;
+  }
+}
+.target {
+  font-size: 0.875rem;
+  color: #9a9a9a;
+
+  @media screen and (max-width: $width-xs) {
+    font-size: 0.75rem;
+  }
+}

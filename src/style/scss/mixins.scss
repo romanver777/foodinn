@@ -8,9 +8,9 @@ $bg-color: #fff;
 $bg-border-color: #ddd;
 $bg-main-panel-color: #f4f3f0;
 $brand-color: #666666;
-$nav-color: rgba(102,102,102,0.7);
-$green: #47cf73;
-$green-light: rgba(71, 207, 115, 0.7);
+$nav-color: rgba(102, 102, 102, 0.7);
+$green: #2a9d8f;
+$green-light: #2a9d8f;
 $whitesmoke: rgb(245, 245, 245);
 $gray-hover: #f4f3f0;
 $gray-active-warm: rgba(244, 243, 240);
@@ -19,9 +19,11 @@ $gray: #dedcd7;
 $shadow: rgba(31, 22, 13, 0.1);
 
 $icons: (
-    "house": "../../style/icons/house.svg",
-    "dashboard": "../../style/icons/dashboard.svg",
-    "chartPie": "../../style/icons/chart-pie.svg",
-    "chartPipe": "../../style/icons/chart-pipe.svg",
-    "equaliser": "../../style/icons/equaliser.svg",
+  "house": "../../style/icons/house.svg",
+  "dashboard": "../../style/icons/dashboard.svg",
+  "chartPie": "../../style/icons/chart-pie.svg",
+  "chartPipe": "../../style/icons/chart-pipe.svg",
+  "equaliser": "../../style/icons/equaliser.svg",
 );
+
+$colors-nutrients: #2a9d8f, #e9c46a, #e76f51, #f4a261;
