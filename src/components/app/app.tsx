@@ -25,9 +25,12 @@ const App = () => {
 
   const handleSidebarOpen = () => setIsOpenSb(!isOpenSb);
 
-  const mainPanel = isOpenSb
+  const styleMainPanel = isOpenSb
     ? style["main-panel"] + " " + style["main-panel_sidebar-open"]
     : style["main-panel"];
+  const styleContent = isOpenSb
+    ? style.content + " " + style["content_sidebar-open"]
+    : style.content;
 
   return (
     <div className={style.wrapper}>
@@ -36,13 +39,13 @@ const App = () => {
         routes={routes}
         activePage={location.pathname.slice(1)}
       />
-      <main className={mainPanel}>
+      <main className={styleMainPanel}>
         <Navbar
           title={getPageName(location.pathname.slice(1))}
           isOpenSb={isOpenSb}
           onClickHandle={handleSidebarOpen}
         />
-        <div className={style.content}>
+        <div className={styleContent}>
           <Routes>
             {routes.map((item) => {
               return (
