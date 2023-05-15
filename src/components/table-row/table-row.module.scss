@@ -1,0 +1,61 @@
+@use "sass:map";
+@import "../../style/scss/mixins.scss";
+
+.td {
+  padding: 5px 7px;
+  height: 1px;
+}
+.tr{
+    border-bottom: 1px solid $gray;
+
+  &:last-child{
+    border: none;
+  }
+}
+.bgy-list {
+  font-size: 0.5625rem;
+  border-left: 10px solid transparent;
+}
+.bgy-item {
+  position: relative;
+  width: 23px;
+  border: none;
+  text-align: center;
+
+  &:after {
+    position: absolute;
+    content: "|";
+    font-size: 8px;
+    right: -2px;
+    color: black;
+  }
+
+  &:last-child {
+    &:after {
+      content: none;
+    }
+  }
+}
+.weight-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: self-end;
+    justify-content: space-between;
+    height: 100%;
+}
+.weight{
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+}
+
+@each $name, $color in $colors-gbyk {
+  $i: index($colors-gbyk, $color);
+  .bgy-#{$name} {
+    color: $color;
+  }
+}
+.kkal {
+  font-size: 0.5625rem;
+  color: map.get($colors-gbyk, kkal);
+}
