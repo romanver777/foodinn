@@ -17,6 +17,7 @@ $gray-active-warm: rgba(244, 243, 240);
 $gray-hover-light: rgba(211, 211, 211, 0.2);
 $gray: #dedcd7;
 $shadow: rgba(31, 22, 13, 0.1);
+$blue: #264653;
 
 $icons: (
   "house": "../../style/icons/house.svg",
@@ -27,3 +28,10 @@ $icons: (
 );
 
 $colors-nutrients: #2a9d8f, #e9c46a, #e76f51, #f4a261;
+
+$colors-gbyk: (
+  prot:#2a9d8f,
+  fat: #e9c46a,
+  carbs: #e76f51,
+  kkal: #f4a261,
+);

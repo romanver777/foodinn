@@ -1,0 +1,63 @@
+@import "../../style/scss/mixins.scss";
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    flex-grow: 1;
+    margin: 0 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    color: #252422;
+  
+    &:first-child {
+      @media screen and (max-width: $width-s) {
+        margin-left: 0;
+      }
+    }
+    &:last-child {
+      @media screen and (max-width: $width-s) {
+        margin-right: 0;
+      }
+    }
+    @media screen and (max-width: $width-m) {
+      margin: 0 10px 20px;
+    }
+    @media screen and (max-width: $width-s) {
+      margin: 0 5px 20px;
+    }
+    @media screen and (max-width: $width-xs) {
+      margin: 0 3px 20px;
+    }
+  }
+  .wrapper {
+    width: 100%;
+    height: calc(100% - 30px);
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  
+    @media screen and (max-width: $width-l) {
+      padding: 15px;
+    }
+    @media screen and (max-width: 1050px) {
+      padding: 10px;
+      height: calc(100% - 20px);
+    }
+    @media screen and (max-width: $width-m) {
+      padding: 15px;
+      height: calc(100% - 30px);
+    }
+    @media screen and (max-width: $width-s) {
+      flex-direction: column;
+      padding: 10px 10px 8px;
+      height: calc(100% - 18px);
+    }
+    @media screen and (max-width: 330px) {
+      padding: 10px 5px 8px;
+    }
+  }
