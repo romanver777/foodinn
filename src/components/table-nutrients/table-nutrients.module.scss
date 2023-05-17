@@ -6,10 +6,17 @@
   text-align: center;
 }
 .date {
-  font-size: 1.25rem;
-  text-transform: capitalize;
+  font-size: 1rem;
+  text-transform: uppercase;
   color: $blue;
-  font-weight: 100;
+  font-weight: 500;
+  
+  @media screen and (max-width: $width-s) {
+    display: inline-block;
+    height: 21px;
+    border-bottom: 1px solid $gray;
+    cursor: pointer;
+  }
 }
 .body {
   width: 100%;
@@ -19,6 +26,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  color: #264653;
 }
 .thead {
   font-size: 0.875rem;
@@ -40,4 +48,6 @@
 }
 .nofood{
     color: $blue;
+    text-align: center;
+    font-size: 0.875rem;
 }

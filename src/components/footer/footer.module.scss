@@ -1,12 +1,16 @@
 @import "../../style/scss/mixins.scss";
 
-.footer{
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $bg-main-panel-color;
+.footer {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $bg-main-panel-color;
+
+  @media screen and (max-width: $width-m) {
+    display: none;
+  }
 }
-.copyright{
-    font-size: 0.75rem;
+.copyright {
+  font-size: 0.75rem;
 }

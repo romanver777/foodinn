@@ -27,22 +27,25 @@
   box-sizing: border-box;
   padding: 0 15px 30px;
   margin-top: 95px;
+  position: relative;
 
   @media screen and (max-width: $width-m) {
+    padding-bottom: 15px;
+
     &:after {
       position: absolute;
       content: "";
       width: 0;
       height: 100%;
       background-color: $gray-hover-light;
-      top: 70px;
+      top: -26px;
       left: 0;
       transition: 0.5s;
     }
   }
 
   @media screen and (max-width: $width-xs) {
-    padding: 0 10px 30px;
+    padding: 0 10px 10px;
   }
 }
 .content_sidebar-open {
