@@ -14,6 +14,7 @@
 }
 .bgy-list {
   font-size: 0.5625rem;
+  font-size: 0.625rem;
   border-left: 10px solid transparent;
 }
 .bgy-item {
@@ -26,7 +27,8 @@
     position: absolute;
     content: "|";
     font-size: 8px;
-    right: -2px;
+    letter-spacing: 0;
+    right: -3px;
     color: black;
   }
 
@@ -56,6 +58,6 @@
   }
 }
 .kkal {
-  font-size: 0.5625rem;
+  font-size: 0.625rem;
   color: map.get($colors-gbyk, kkal);
 }

@@ -1,3 +1,84 @@
-.row{
-    display: flex;
+@import "../../style/scss/mixins.scss";
+
+.row {
+  display: flex;
+  position: relative;
+  transition: 0.5s;
+}
+.row_slide {
+  @media screen and (max-width: $width-s) {
+    transform: translateX(calc(-100% - 25px));
+    transition: 0.5s;
+  }
+  @media screen and (max-width: $width-xs) {
+    transform: translateX(calc(-100% - 20px));
+    transition: 0.5s;
+  }
+}
+.column {
+  display: flex;
+  width: 50%;
+  height: auto;
+  flex-grow: 1;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: $width-s) {
+    margin-right: 10px;
+  }
+  @media screen and (max-width: $width-xs) {
+    margin-right: 5px;
+  }
+}
+.column_fg {
+  width: auto;
+  flex-grow: 0;
+
+  @media screen and (max-width: $width-s) {
+    flex-grow: 1;
+  }
+}
+.column-nutrie,
+.column-dp {
+  @media screen and (max-width: $width-s) {
+    min-width: 100%;
+  }
+}
+.column-nutrie {
+  @media screen and (max-width: $width-s) {
+    margin-right: 25px;
+  }
+  @media screen and (max-width: $width-xs) {
+    margin-right: 20px;
+  }
+}
+.row-btn{
+  padding: 0 15px;
+
+  @media screen and (max-width: $width-m) {
+    padding: 0 10px;
+  }
+  @media screen and (max-width: $width-s) {
+    padding: 0;
+  }
+}
+.btn {
+  border: none;
+  border-radius: 12px;
+  height: 40px;
+  padding: 0 15px;
+  line-height: 40px;
+  cursor: pointer;
+  box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  color: rgb(128, 128, 128);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.8px;
+
+  &:hover {
+    color: $nav-color;
+  }
 }

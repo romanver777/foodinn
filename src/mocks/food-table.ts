@@ -7,7 +7,7 @@ export type TFoodTable = {
   measure: string;
   weight: number;
 };
-
+export const foodTable1 = [];
 export const foodTable = [
   {
     title: "Куриная грудь",

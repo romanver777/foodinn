@@ -17,7 +17,7 @@ type TProps = {
 
 const CardNutrients = ({ title, quantity, target, colorInd }: TProps) => {
   const [currentQuant, setCurrentQuant] = useState(0);
-  const timeout = 100 * (colorInd + 1);
+  const timeout = 100 + 100 * (colorInd + 1);
 
   useEffect(() => {
     setTimeout(() => setCurrentQuant(quantity), timeout);

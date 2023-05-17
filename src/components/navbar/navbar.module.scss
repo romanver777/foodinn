@@ -8,6 +8,7 @@
   display: flex;
   box-shadow: 0px 3px 10px -5px $shadow;
   backdrop-filter: blur(3px);
+  z-index: 1;
 }
 .container {
   width: 100%;
