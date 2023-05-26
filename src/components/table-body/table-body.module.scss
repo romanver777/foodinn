@@ -1,0 +1,30 @@
+@import "../../style/scss/mixins.scss";
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #264653;
+  }
+  .thead {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $blue;
+    text-transform: uppercase;
+    display: none;
+  
+    th {
+      padding: 12px 7px;
+    }
+  }
+  .colWeight {
+    width: 15%;
+    text-align: right;
+  }
+  .tbody {
+    font-size: 0.875rem;
+  }
+  .nofood{
+      color: $blue;
+      text-align: center;
+      font-size: 0.875rem;
+  }

@@ -1,12 +1,13 @@
 import React from "react";
 
-import TableRow from "../table-row/table-row";
+import TableBody from "../table-body/table-body";
+import MealList from "../meal-list/meal-list";
 import style from "./table-nutrients.module.scss";
 
-import { TFoodTable } from "../../mocks/food-table";
+import { TFood } from "../../mocks/food";
 
 type TProps = {
-  food: TFoodTable[];
+  food: TFood[];
   date: Date;
   onHandleClick: () => void;
 };
@@ -32,24 +33,10 @@ const TableNutrients = ({ food, date, onHandleClick }: TProps) => {
         </div>
       </div>
       <div className={style.body}>
-        {!!food.length && (
-          <table className={style.table}>
-            <thead className={style.thead}>
-              <tr>
-                <th className={style.colName}>Название</th>
-                <th className={style.colWeight}>Вес</th>
-              </tr>
-            </thead>
-            <tbody className={style.tbody}>
-              {food.map((item: TFoodTable) => (
-                <TableRow food={item} key={item.title} />
-              ))}
-            </tbody>
-          </table>
-        )}
-        {!food.length && (
-          <div className={style.nofood}>Список продуктов пуст</div>
-        )}
+        <TableBody food={food} noFoodMessage="Список продуктов пуст" />
+      </div>
+      <div className={style.footer}>
+        <MealList />
       </div>
     </>
   );

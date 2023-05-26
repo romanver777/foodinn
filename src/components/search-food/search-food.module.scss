@@ -1,0 +1,83 @@
+@import "../../style/scss/mixins.scss";
+
+input[type="search"] {
+  font-family: "Open Sans", Arial, sans-serif;
+  background-color: $bg-color;
+  border: 1px solid $gray;
+  border-radius: 9px;
+  color: $blue;
+  width: 100%;
+  height: auto;
+  font-size: 0.875rem;
+  letter-spacing: 0.8px;
+  padding: 10px 10px 10px 12px;
+  outline: none;
+  box-sizing: border-box;
+  transition: 0.3s;
+  margin: 10px 0 15px;
+
+  &:focus {
+    border: 1px solid $gray-input-border;
+  }
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { 
+  display: none; 
+}
+.header {
+  width: 100%;
+  padding: 5px 0 7px;
+  text-align: center;
+  position: relative;
+}
+.body {
+  width: 100%;
+  height: auto;
+  margin-bottom: 25px;
+}
+.input {
+
+  &:after {
+    position: absolute;
+    right: 0;
+    content: "";
+    width: 24px;
+    height: 24px;
+    background-image: url(../../style/icons/cross.svg);
+    background-repeat: no-repeat;
+  }
+}
+.reset-btn {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s;
+  position: absolute;
+  right: 9px;
+  top: calc(50% - 3px);
+  transform: translateY(-50%);
+  border-radius: 9px;
+
+  &:hover {
+    border-radius: 9px;
+    opacity: 0.8;
+    background-color: rgba(211, 211, 211, 0.3);;
+    transition: 0.3s;
+  }
+
+  @media screen and (max-width: $width-m) {
+    // right: 10px;
+  }
+}
+.cross-icon {
+  width: 14px;
+  height: auto;
+  opacity: 0.4;
+}
