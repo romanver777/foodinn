@@ -1,5 +1,5 @@
 .react-datepicker {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   background-color: #fff;
   border-radius: 12px;
   border: none;
@@ -18,17 +18,16 @@
 .react-datepicker__day,
 .react-datepicker__day-name {
   color: #264653;
+  width: 2.5rem;
+  line-height: 2.5rem;
 }
 .react-datepicker__day:hover {
   border-radius: 9px;
 }
 .react-datepicker__current-month {
   font-weight: normal;
-  text-transform: capitalize;
+  text-transform: uppercase;
   color: #264653;
-}
-.react-datepicker__day--today {
-  font-size: 0.73rem;
 }
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected {
