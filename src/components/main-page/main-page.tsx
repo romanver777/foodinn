@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { TRootState } from "../../store/store";
-import { setDayFood } from "../../store/food-days-reducer";
+import { setDayFood, removeDayFood } from "../../store/food-days-reducer";
 import { clearSelected } from "../../store/food-selected-reducer";
 
 import DatePicker from "react-datepicker";
@@ -35,11 +36,25 @@ const MainPage = () => {
     const result = state.foodDays.days.filter(
       (el) => el.date === getFormatDate(date)
     );
-    if (result.length)
+    if (result.length) {
       return result[0].dayFood
         .filter((item) => item.meal === meal)
         .map((el) => el.food);
+    }
     return [];
+  });
+  const dayFoodWeight = useSelector((state: TRootState) => {
+    const result = state.foodDays.days.filter(
+      (el) => el.date === getFormatDate(date)
+    );
+    if (result.length) {
+      return result[0].dayFood
+        .filter((item) => item.meal === meal)
+        .map((el) => {
+          return { id: el.food.id, weight: el.weight };
+        });
+    }
+    return undefined;
   });
 
   const styleRow = dpOpen ? style.row + " " + style["row_slide"] : style.row;
@@ -48,17 +63,26 @@ const MainPage = () => {
     : style.front;
   const styleBack = isFlip ? style.back + " " + style["back_flip"] : style.back;
 
+  useEffect(() => {
+    dispatch(clearSelected());
+  }, [meal, dpOpen]);
+
   const handleDate = (date: Date) => {
     setDate(date);
     setDpOpen(!dpOpen);
   };
 
-  const handleClick = () => {
+  const handleDateClick = () => {
     if (window.innerWidth <= 768) setDpOpen(!dpOpen);
   };
-  const handleFlip = () => {
+  const handleButtonClick = () => {
     if (isFlip && selected.length) dispatch(clearSelected());
-    setIsFlip(!isFlip);
+    if (!isFlip && selected.length) dispatch(clearSelected());
+    if (dpOpen) {
+      handleDateClick();
+    } else if (isFlip) {
+      setIsFlip(!isFlip);
+    }
   };
   const handleClickAddProds = () => {
     if (selected.length) {
@@ -68,8 +92,13 @@ const MainPage = () => {
           dayFood: selected,
         })
       );
-      handleFlip();
+      dispatch(clearSelected());
     }
+    setIsFlip(!isFlip);
+  };
+  const handleDeleteClick = () => {
+    dispatch(removeDayFood({ date: getFormatDate(date), food: selected }));
+    dispatch(clearSelected());
   };
 
   return (
@@ -84,8 +113,9 @@ const MainPage = () => {
               <Card isCol={true} newClass="_flip">
                 <TableNutrients
                   food={dayFood}
+                  foodWeight={dayFoodWeight}
                   date={date}
-                  onHandleClick={() => handleClick()}
+                  onHandleClick={() => handleDateClick()}
                 />
               </Card>
             </div>
@@ -116,20 +146,45 @@ const MainPage = () => {
         </div>
       </div>
       <div className={style.row + " " + style["row-btn"]}>
-        <button
-          className={style.btn + " " + style["btn_back"]}
-          onClick={handleFlip}
-        >
-          {isFlip ? <span>&lt;</span> : "Добавить продукты"}
-        </button>
-        {isFlip && (
+        {isFlip || dpOpen ? (
+          <button
+            className={style.btn + " " + style["btn_back"]}
+            onClick={handleButtonClick}
+          >
+            &lt;
+          </button>
+        ) : null}
+        {isFlip == false && selected.length == 0 && dpOpen == false ? (
+          <button
+            className={style.btn + " " + style["btn_back"]}
+            onClick={handleClickAddProds}
+          >
+            Добавить продукты
+          </button>
+        ) : null}
+
+        {isFlip && !!selected.length && (
           <button className={style.btn} onClick={handleClickAddProds}>
             Добавить продукты
-            {!!selected.length && (
-              <div className={style.products}>{selected.length}</div>
-            )}
+            <div className={style.products}>{selected.length}</div>
           </button>
         )}
+        {isFlip == false && selected.length > 0 ? (
+          <>
+            <button
+              className={style.btn + " " + style["btn_back"]}
+              onClick={handleButtonClick}
+            >
+              &lt;
+            </button>
+            <button
+              className={`${style.btn} ${style["btn-weight"]}`}
+              onClick={handleDeleteClick}
+            >
+              Удалить
+            </button>
+          </>
+        ) : null}
       </div>
     </>
   );

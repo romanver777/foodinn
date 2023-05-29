@@ -4,6 +4,7 @@ import { TFood } from "../mocks/food";
 type TMealFood = {
   meal: string;
   food: TFood;
+  weight: number;
 };
 
 type TDayFood = {
@@ -67,8 +68,32 @@ export const foodDaySlice = createSlice({
         state.days.push(action.payload);
       }
     },
+    removeDayFood: (
+      state,
+      action: PayloadAction<{ date: string; food: TMealFood[] }>
+    ) => {
+      const currState = JSON.parse(JSON.stringify(state.days)) as TDayFood[];
+
+      const currDayObj = currState.filter(
+        (el) => el.date === action.payload.date
+      )[0];
+
+      const otherMealFood = currDayObj.dayFood.filter(
+        (el) => el.meal !== action.payload.food[0].meal
+      );
+      const otherFoodNoDeleteItem = currDayObj.dayFood.filter(
+        (el) =>
+          el.meal === action.payload.food[0].meal &&
+          el.food.id !== action.payload.food[0].food.id
+      );
+      const filteredFood = [...otherMealFood, ...otherFoodNoDeleteItem];
+      currDayObj.dayFood = filteredFood;
+
+      state.days = state.days.filter((el) => el.date !== action.payload.date);
+      state.days.push(currDayObj);
+    },
   },
 });
 
-export const { setDayFood } = foodDaySlice.actions;
+export const { setDayFood, removeDayFood } = foodDaySlice.actions;
 export default foodDaySlice.reducer;

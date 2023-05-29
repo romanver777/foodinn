@@ -8,17 +8,17 @@
 .tr {
   display: inline-table;
   width: 100%;
-  border-radius: 9px;
+  border-radius: 12px;
   position: relative;
   overflow: hidden;
   transition: 0.3s;
   cursor: pointer;
 
-  &:after{
+  &:after {
     position: absolute;
     content: "";
-    width: 95%;
-    height: 0.5px;
+    width: 91%;
+    height: 1px;
     background-color: $gray-hover-light;
     bottom: 0px;
     left: 50%;
@@ -26,42 +26,65 @@
   }
 
   &:hover {
-    border-radius: 9px;
-    background-color: rgba(211,211,211,0.1);
+    border-radius: 12px;
+    background-color: rgba(211, 211, 211, 0.1);
     transition: 0.3s;
 
-    &:after{
+    &:after {
       content: none;
+    }
+  }
+  @media screen and (max-width: $width-s) {
+    &:hover {
+      background-color: transparent;
+
+      &:after {
+        position: absolute;
+        content: "";
+        width: 91%;
+        height: 1px;
+        background-color: $gray-hover-light;
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
   }
 
   &:last-child {
-    &:after{
+    &:after {
       content: none;
     }
   }
 }
-.tr_active{
-  background-color: rgba(211,211,211,0.2);
+.tr_active {
+  background-color: rgba(211, 211, 211, 0.2);
+  margin-bottom: 3px;
 
   &:hover {
-    background-color: rgba(211,211,211,0.2);
+    background-color: rgba(211, 211, 211, 0.2);
+    &:after {
+      content: none;
+    }
+  }
+  &:after {
+    content: none;
   }
 }
 .bgy-list {
-  font-size: 0.5625rem;
   font-size: 0.625rem;
   border-left: 10px solid transparent;
 }
 .bgy-item {
   position: relative;
-  width: 23px;
+  width: 25px;
   border: none;
   text-align: center;
+  letter-spacing: 0;
 
   &:after {
     position: absolute;
-    content: "|";
+    content: "-";
     font-size: 8px;
     letter-spacing: 0;
     right: -3px;

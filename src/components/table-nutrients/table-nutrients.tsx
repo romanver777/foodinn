@@ -6,13 +6,19 @@ import style from "./table-nutrients.module.scss";
 
 import { TFood } from "../../mocks/food";
 
+type TFoodWeight = {
+  id: number;
+  weight: number;
+};
+
 type TProps = {
   food: TFood[];
+  foodWeight?: TFoodWeight[];
   date: Date;
   onHandleClick: () => void;
 };
 
-const TableNutrients = ({ food, date, onHandleClick }: TProps) => {
+const TableNutrients = ({ food, foodWeight, date, onHandleClick }: TProps) => {
   const getFormatDate = (date: Date) => {
     const mNum = date.getMonth() + 1;
     const mWord = date.toLocaleString("default", { month: "long" });
@@ -33,7 +39,11 @@ const TableNutrients = ({ food, date, onHandleClick }: TProps) => {
         </div>
       </div>
       <div className={style.body}>
-        <TableBody food={food} noFoodMessage="Список продуктов пуст" />
+        <TableBody
+          food={food}
+          foodWeight={foodWeight}
+          noFoodMessage="Список продуктов пуст"
+        />
       </div>
       <div className={style.footer}>
         <MealList />

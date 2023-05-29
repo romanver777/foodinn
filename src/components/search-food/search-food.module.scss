@@ -14,7 +14,7 @@ input[type="search"] {
   outline: none;
   box-sizing: border-box;
   transition: 0.3s;
-  margin: 10px 0 15px;
+  margin: 2px 0 6px;
 
   &:focus {
     border: 1px solid $gray-input-border;
@@ -72,8 +72,9 @@ input[type="search"]::-webkit-search-results-decoration {
     transition: 0.3s;
   }
 
-  @media screen and (max-width: $width-m) {
-    // right: 10px;
+  @media screen and (max-width: $width-s) {
+    background-color: transparent;
+    opacity: 1;
   }
 }
 .cross-icon {
