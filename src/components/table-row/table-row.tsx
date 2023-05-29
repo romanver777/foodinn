@@ -1,50 +1,46 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { TRootState } from "../../store/store";
-import { setSelected, removeSelected } from "../../store/food-selected-reducer";
+import React from "react";
 
 import style from "./table-row.module.scss";
 import { TFood } from "../../mocks/food";
 
 type TProps = {
   food: TFood;
-  key: string;
+  weight?: number;
+  isActive: boolean;
+  onHandleClick: (food: TFood) => void;
+  key: number;
 };
 
-const TableRow = (props: TProps) => {
-  const { food } = props;
-  const [active, setActive] = useState(false);
-  const dispatch = useDispatch();
-  const meal = useSelector((state: TRootState) => state.meal.activeMeal);
+const TableRow = ({ food, weight, isActive, onHandleClick }: TProps) => {
+  const getKkal = (p: number, f: number, c: number) => (p + c) * 4 + f * 9;
+  const foodWeight = weight === undefined ? food.portion : weight;
+  const prot =
+    weight === undefined ? food.prot : (foodWeight * food.prot) / food.portion;
+  const fat =
+    weight === undefined ? food.fat : (foodWeight * food.fat) / food.portion;
+  const carbs =
+    weight === undefined
+      ? food.carbs
+      : (foodWeight * food.carbs) / food.portion;
+  const kkal = getKkal(prot, fat, carbs);
 
-  const kkal = (food.prot + food.carbs) * 4 + food.fat * 9;
-
-  const styleTr = active ? style.tr + " " + style["tr_active"] : style.tr;
-
-  const handleClick = () => {
-    if (!active) {
-      dispatch(setSelected({ meal, food }));
-    } else {
-      dispatch(removeSelected({ meal, food }));
-    }
-    setActive(!active);
-  };
+  const styleTr = isActive ? style.tr + " " + style["tr_active"] : style.tr;
 
   return (
-    <tr className={styleTr} onClick={handleClick}>
+    <tr className={styleTr} onClick={() => onHandleClick(food)}>
       <td className={style.td}>
         <div className={style["td-title"]}>{food.title}</div>
         <table>
           <tbody>
             <tr className={style["bgy-list"]}>
               <td className={style["bgy-item"] + " " + style["bgy-prot"]}>
-                {food.prot}
+                {prot}
               </td>
               <td className={style["bgy-item"] + " " + style["bgy-fat"]}>
-                {food.fat}
+                {fat}
               </td>
               <td className={style["bgy-item"] + " " + style["bgy-carbs"]}>
-                {food.carbs}
+                {carbs}
               </td>
             </tr>
           </tbody>
@@ -53,7 +49,7 @@ const TableRow = (props: TProps) => {
       <td className={style.td}>
         <div className={style["weight-wrapper"]}>
           <div className={style.weight}>
-            {food.portion}
+            {foodWeight}
             {food.measure}
           </div>
           <div className={style.kkal}>{kkal}ккал</div>

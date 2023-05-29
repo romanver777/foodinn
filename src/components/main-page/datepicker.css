@@ -21,6 +21,13 @@
   width: 2.5rem;
   line-height: 2.5rem;
 }
+@media screen and (max-width: 1200px) {
+  .react-datepicker__day,
+  .react-datepicker__day-name {
+    width: 1.8rem;
+    line-height: 1.8rem;
+  }
+}
 .react-datepicker__day:hover {
   border-radius: 9px;
 }

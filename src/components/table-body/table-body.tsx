@@ -1,25 +1,34 @@
 import React from "react";
 
-import TableRow from "../table-row/table-row";
+import TableMainList from "../table-main-list/table-main-list";
+import TableSearchList from "../table-search-list/table-search-list";
 import style from "./table-body.module.scss";
 
 import { TFood } from "../../mocks/food";
 
+type TFoodWeight = {
+  id: number;
+  weight: number;
+};
+
 type TTableBody = {
   food: TFood[];
+  foodWeight?: TFoodWeight[];
   noFoodMessage?: string;
 };
 
-const TableBody = ({ food, noFoodMessage }: TTableBody) => {
+const TableBody = ({ food, foodWeight, noFoodMessage }: TTableBody) => {
   if (food.length === 0)
     return <div className={style.nofood}>{noFoodMessage}</div>;
 
   return (
     <table className={style.table}>
       <tbody className={style.tbody}>
-        {food.map((item) => (
-          <TableRow food={item} key={item.title} />
-        ))}
+        {foodWeight !== undefined ? (
+          <TableMainList food={food} foodWeight={foodWeight} />
+        ) : (
+          <TableSearchList food={food} />
+        )}
       </tbody>
     </table>
   );

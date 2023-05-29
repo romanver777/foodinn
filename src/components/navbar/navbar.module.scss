@@ -8,7 +8,13 @@
   display: flex;
   box-shadow: 0px 3px 10px -5px $shadow;
   backdrop-filter: blur(3px);
-  z-index: 1;
+  transition: 0.5s;
+  z-index: 2;
+
+  @media screen and (max-width: $width-s) {
+    min-height: 55px;
+    transition: 0.5s;
+  }
 }
 .container {
   width: 100%;
@@ -58,6 +64,11 @@
       transition: 0.3s;
     }
   }
+  @media screen and (max-width: $width-s) {
+    &:hover {
+      background-color: transparent;
+    }
+  }
 }
 .burger-icon,
 .cross-icon {
@@ -91,6 +102,11 @@
     border-radius: 9px;
     background-color: $gray-hover-light;
     transition: 0.3s;
+  }
+  @media screen and (max-width: $width-s) {
+    &:hover {
+      background-color: transparent;
+    }
   }
 
   &:last-child {
