@@ -32,14 +32,16 @@ const TableMainList = ({ food, foodWeight }: TProps) => {
   };
 
   const handleClick = (food: TFood) => {
-    if (!selected.length) {
-      dispatch(setSelected({ meal, food, weight: 0 }));
-    } else {
-      if (selected.filter((item) => item.food.id === food.id).length) {
-        dispatch(removeSelected({ meal, food, weight: 0 }));
-      } else {
-        dispatch(clearSelected());
+    if (meal.toLowerCase() !== "весь день") {
+      if (!selected.length) {
         dispatch(setSelected({ meal, food, weight: 0 }));
+      } else {
+        if (selected.filter((item) => item.food.id === food.id).length) {
+          dispatch(removeSelected({ meal, food, weight: 0 }));
+        } else {
+          dispatch(clearSelected());
+          dispatch(setSelected({ meal, food, weight: 0 }));
+        }
       }
     }
   };
@@ -60,6 +62,7 @@ const TableMainList = ({ food, foodWeight }: TProps) => {
             isActive={active}
             onHandleClick={handleClick}
             key={item.id}
+            allDayMeal={meal.toLowerCase() === "весь день"}
           />
         );
       })}

@@ -16,6 +16,13 @@ import TableNutrients from "../table-nutrients/table-nutrients";
 import SearchFood from "../search-food/search-food";
 
 import style from "./main-page.module.scss";
+import { TFood } from "../../mocks/food";
+
+const sortByTitle = (a: TFood, b: TFood) => {
+  if (a.title > b.title) return 1;
+  if (a.title < b.title) return -1;
+  return 0;
+};
 
 const MainPage = () => {
   const [date, setDate] = useState(new Date());
@@ -30,16 +37,35 @@ const MainPage = () => {
     });
 
   const dispatch = useDispatch();
-  const selected = useSelector((state: TRootState) => state.foodSelected.food);
-  const meal = useSelector((state: TRootState) => state.meal.activeMeal);
+  const selected = useSelector((state: TRootState) => {
+    return state.foodSelected.food;
+  });
+  const meal = useSelector((state: TRootState) => {
+    return state.meal.activeMeal;
+  });
   const dayFood = useSelector((state: TRootState) => {
     const result = state.foodDays.days.filter(
       (el) => el.date === getFormatDate(date)
     );
     if (result.length) {
+      if (meal.toLowerCase() === "весь день") {
+        const res = [] as TFood[];
+        const uniqIds = new Set([...result[0].dayFood.map((el) => el.food.id)]);
+
+        Array.from(uniqIds).forEach((id) => {
+          const itemById = result[0].dayFood.find(
+            (item) => item.food.id === id
+          )?.food;
+
+          if (itemById !== undefined) res.push(itemById);
+        });
+
+        return res.sort(sortByTitle);
+      }
       return result[0].dayFood
         .filter((item) => item.meal === meal)
-        .map((el) => el.food);
+        .map((el) => el.food)
+        .sort(sortByTitle);
     }
     return [];
   });
@@ -48,6 +74,18 @@ const MainPage = () => {
       (el) => el.date === getFormatDate(date)
     );
     if (result.length) {
+      if (meal.toLowerCase() === "весь день") {
+        const res = [] as { id: number; weight: number }[];
+        const uniqIds = new Set([...result[0].dayFood.map((el) => el.food.id)]);
+
+        Array.from(uniqIds).forEach((id) => {
+          const itemByIdWeight = result[0].dayFood
+            .filter((item) => item.food.id === id)
+            .reduce((a, el) => a + el.weight, 0);
+          res.push({ id, weight: itemByIdWeight });
+        });
+        return res;
+      }
       return result[0].dayFood
         .filter((item) => item.meal === meal)
         .map((el) => {
@@ -154,7 +192,10 @@ const MainPage = () => {
             Назад
           </button>
         ) : null}
-        {isFlip == false && selected.length == 0 && dpOpen == false ? (
+        {isFlip == false &&
+        selected.length == 0 &&
+        dpOpen == false &&
+        meal.toLowerCase() !== "весь день" ? (
           <button
             className={style.btn + " " + style["btn_back"]}
             onClick={handleClickAddProds}
@@ -169,7 +210,9 @@ const MainPage = () => {
             <div className={style.products}>{selected.length}</div>
           </button>
         )}
-        {isFlip == false && selected.length > 0 ? (
+        {isFlip == false &&
+        selected.length > 0 &&
+        meal.toLowerCase() !== "весь день" ? (
           <>
             <button
               className={style.btn + " " + style["btn_back"]}
