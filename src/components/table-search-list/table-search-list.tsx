@@ -39,6 +39,7 @@ const TableSearchList = ({ food }: TProps) => {
             isActive={active}
             onHandleClick={handleClick}
             key={item.id}
+            allDayMeal={false}
           />
         );
       })}

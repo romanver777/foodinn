@@ -8,10 +8,17 @@ type TProps = {
   weight?: number;
   isActive: boolean;
   onHandleClick: (food: TFood) => void;
+  allDayMeal: boolean;
   key: number;
 };
 
-const TableRow = ({ food, weight, isActive, onHandleClick }: TProps) => {
+const TableRow = ({
+  food,
+  weight,
+  isActive,
+  onHandleClick,
+  allDayMeal,
+}: TProps) => {
   const getKkal = (p: number, f: number, c: number) => (p + c) * 4 + f * 9;
   const foodWeight = weight === undefined ? food.portion : weight;
   const prot =
@@ -24,7 +31,8 @@ const TableRow = ({ food, weight, isActive, onHandleClick }: TProps) => {
       : (foodWeight * food.carbs) / food.portion;
   const kkal = getKkal(prot, fat, carbs);
 
-  const styleTr = isActive ? style.tr + " " + style["tr_active"] : style.tr;
+  let styleTr = isActive ? style.tr + " " + style["tr_active"] : style.tr;
+  styleTr = allDayMeal ? style.tr + " " + style["tr_cursordefault"] : styleTr;
 
   return (
     <tr className={styleTr} onClick={() => onHandleClick(food)}>
