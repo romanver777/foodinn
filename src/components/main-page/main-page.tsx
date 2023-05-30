@@ -151,7 +151,7 @@ const MainPage = () => {
             className={style.btn + " " + style["btn_back"]}
             onClick={handleButtonClick}
           >
-            &lt;
+            Назад
           </button>
         ) : null}
         {isFlip == false && selected.length == 0 && dpOpen == false ? (
@@ -175,7 +175,7 @@ const MainPage = () => {
               className={style.btn + " " + style["btn_back"]}
               onClick={handleButtonClick}
             >
-              &lt;
+              Назад
             </button>
             <button
               className={`${style.btn} ${style["btn-weight"]}`}
