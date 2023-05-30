@@ -67,6 +67,7 @@
   }
   @media screen and (max-width: $width-s) {
     padding: 0;
+    justify-content: flex-end;
   }
 }
 .btn {
@@ -74,6 +75,7 @@
   border: none;
   border-radius: 12px;
   height: 40px;
+  line-height: 43px;
   padding: 0 15px;
   cursor: pointer;
   box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
@@ -90,14 +92,16 @@
   &:focus-visible {
     outline: none;
   }
-
+  &:last-child{
+    margin-right: 0;
+  }
   @media screen and (max-width: $width-xs) {
     font-size: 0.625rem;
   }
 }
-.btn_back{
-  margin-right: 5px;
-}
+// .btn_back{
+//   margin-right: 5px;
+// }
 .products {
   position: absolute;
   right: 2px;
