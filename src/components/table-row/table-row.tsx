@@ -19,17 +19,28 @@ const TableRow = ({
   onHandleClick,
   allDayMeal,
 }: TProps) => {
+  const getFixed = (number: number) => {
+    const fixed = number.toFixed(1);
+    if (fixed[fixed.length - 1] === "0") {
+      return +number.toFixed();
+    }
+    return +fixed;
+  };
   const getKkal = (p: number, f: number, c: number) => (p + c) * 4 + f * 9;
   const foodWeight = weight === undefined ? food.portion : weight;
   const prot =
-    weight === undefined ? food.prot : (foodWeight * food.prot) / food.portion;
+    weight === undefined
+      ? food.prot
+      : getFixed((foodWeight * food.prot) / food.portion);
   const fat =
-    weight === undefined ? food.fat : (foodWeight * food.fat) / food.portion;
+    weight === undefined
+      ? food.fat
+      : getFixed((foodWeight * food.fat) / food.portion);
   const carbs =
     weight === undefined
       ? food.carbs
-      : (foodWeight * food.carbs) / food.portion;
-  const kkal = getKkal(prot, fat, carbs);
+      : getFixed((foodWeight * food.carbs) / food.portion);
+  const kkal = getFixed(getKkal(prot, fat, carbs));
 
   let styleTr = isActive ? style.tr + " " + style["tr_active"] : style.tr;
   styleTr = allDayMeal ? style.tr + " " + style["tr_cursordefault"] : styleTr;

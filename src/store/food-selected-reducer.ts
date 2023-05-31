@@ -32,6 +32,13 @@ export const foodSelectedSlice = createSlice({
         state.food.push(action.payload);
       }
     },
+    setWeightSelected: (state, action: PayloadAction<number>) => {
+      state.food[0] = {
+        meal: state.food[0].meal,
+        food: state.food[0].food,
+        weight: action.payload,
+      };
+    },
     removeSelected: (state, action: PayloadAction<TPayload>) => {
       const currState = JSON.parse(JSON.stringify(state.food)) as TPayload[];
 
@@ -47,6 +54,6 @@ export const foodSelectedSlice = createSlice({
   },
 });
 
-export const { setSelected, removeSelected, clearSelected } =
+export const { setSelected, removeSelected, setWeightSelected, clearSelected } =
   foodSelectedSlice.actions;
 export default foodSelectedSlice.reducer;

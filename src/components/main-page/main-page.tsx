@@ -3,7 +3,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TRootState } from "../../store/store";
 import { setDayFood, removeDayFood } from "../../store/food-days-reducer";
-import { clearSelected } from "../../store/food-selected-reducer";
+import {
+  clearSelected,
+  setWeightSelected,
+} from "../../store/food-selected-reducer";
 
 import DatePicker from "react-datepicker";
 import ru from "date-fns/locale/ru";
@@ -28,6 +31,7 @@ const MainPage = () => {
   const [date, setDate] = useState(new Date());
   const [dpOpen, setDpOpen] = useState(false);
   const [isFlip, setIsFlip] = useState(false);
+  const [value, setValue] = useState<number | string>(0);
 
   const getFormatDate = (date: Date) =>
     date.toLocaleString("default", {
@@ -37,8 +41,12 @@ const MainPage = () => {
     });
 
   const dispatch = useDispatch();
-  const selected = useSelector((state: TRootState) => {
-    return state.foodSelected.food;
+  const selected = useSelector((state: TRootState) => state.foodSelected.food);
+  const selectedWeight = useSelector((state: TRootState) => {
+    if (state.foodSelected.food.length) {
+      return state.foodSelected.food[0].weight;
+    }
+    return 0;
   });
   const meal = useSelector((state: TRootState) => {
     return state.meal.activeMeal;
@@ -105,6 +113,15 @@ const MainPage = () => {
     dispatch(clearSelected());
   }, [meal, dpOpen]);
 
+  useEffect(() => {
+    if (selected.length) {
+      dispatch(removeDayFood({ date: getFormatDate(date), food: selected }));
+      dispatch(setDayFood({ date: getFormatDate(date), dayFood: selected }));
+      dispatch(clearSelected());
+      setValue(0);
+    }
+  }, [selectedWeight]);
+
   const handleDate = (date: Date) => {
     setDate(date);
     setDpOpen(!dpOpen);
@@ -138,11 +155,20 @@ const MainPage = () => {
     dispatch(removeDayFood({ date: getFormatDate(date), food: selected }));
     dispatch(clearSelected());
   };
+  const handleChangeWeightClick = () => {
+    if (value !== selected[0].weight) {
+      dispatch(setWeightSelected(+value));
+    }
+  };
+  const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleChangeWeightClick();
+  };
 
   return (
     <>
       <div className={style.row}>
-        <CardNutrientsList />
+        <CardNutrientsList date={getFormatDate(date)} />
       </div>
       <div className={styleRow}>
         <div className={style.column + " " + style["column-nutrie"]}>
@@ -225,6 +251,23 @@ const MainPage = () => {
               onClick={handleDeleteClick}
             >
               Удалить
+            </button>
+            <button
+              className={`${style.btn} ${style["btn-weight"]}`}
+              onClick={handleChangeWeightClick}
+            >
+              Изменить вес
+              <form onSubmit={handleForm} className={style.form}>
+                <input
+                  type="number"
+                  name="weight"
+                  value={value}
+                  onChange={(e) => setValue(+e.target.value)}
+                  onFocus={() => setValue("")}
+                  onBlur={() => setValue(0)}
+                  className={style.in}
+                />
+              </form>
             </button>
           </>
         ) : null}
