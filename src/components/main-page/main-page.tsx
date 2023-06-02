@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { TRootState } from "../../store/store";
 import { setDayFood, removeDayFood } from "../../store/food-days-reducer";
 import {
   clearSelected,
   setWeightSelected,
 } from "../../store/food-selected-reducer";
+import { setDefaultMeal } from "../../store/meal-reducer";
+import * as selectors from "../../store/selectors";
 
 import DatePicker from "react-datepicker";
 import ru from "date-fns/locale/ru";
@@ -19,13 +20,13 @@ import TableNutrients from "../table-nutrients/table-nutrients";
 import SearchFood from "../search-food/search-food";
 
 import style from "./main-page.module.scss";
-import { TFood } from "../../mocks/food";
 
-const sortByTitle = (a: TFood, b: TFood) => {
-  if (a.title > b.title) return 1;
-  if (a.title < b.title) return -1;
-  return 0;
-};
+const getFormatDate = (date: Date) =>
+  date.toLocaleString("default", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
 
 const MainPage = () => {
   const [date, setDate] = useState(new Date());
@@ -33,81 +34,18 @@ const MainPage = () => {
   const [isFlip, setIsFlip] = useState(false);
   const [value, setValue] = useState<number | string>(0);
 
-  const getFormatDate = (date: Date) =>
-    date.toLocaleString("default", {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-    });
-
   const dispatch = useDispatch();
-  const selected = useSelector((state: TRootState) => state.foodSelected.food);
-  const selectedWeight = useSelector((state: TRootState) => {
-    if (state.foodSelected.food.length) {
-      return state.foodSelected.food[0].weight;
-    }
-    return 0;
-  });
-  const meal = useSelector((state: TRootState) => {
-    return state.meal.activeMeal;
-  });
-  const dayFood = useSelector((state: TRootState) => {
-    const result = state.foodDays.days.filter(
-      (el) => el.date === getFormatDate(date)
-    );
-    if (result.length) {
-      if (meal.toLowerCase() === "весь день") {
-        const res = [] as TFood[];
-        const uniqIds = new Set([...result[0].dayFood.map((el) => el.food.id)]);
+  const selected = useSelector(selectors.getSelectedItems);
+  const selectedWeight = useSelector(selectors.getWeightOfSingleSelected);
+  const meal = useSelector(selectors.getCurrentMeal);
+  const dayFood = useSelector(selectors.getDayFoodByMeal(getFormatDate(date)));
+  const dayFoodWeight = useSelector(
+    selectors.getDayFoodWeight(getFormatDate(date))
+  );
 
-        Array.from(uniqIds).forEach((id) => {
-          const itemById = result[0].dayFood.find(
-            (item) => item.food.id === id
-          )?.food;
-
-          if (itemById !== undefined) res.push(itemById);
-        });
-
-        return res.sort(sortByTitle);
-      }
-      return result[0].dayFood
-        .filter((item) => item.meal === meal)
-        .map((el) => el.food)
-        .sort(sortByTitle);
-    }
-    return [];
-  });
-  const dayFoodWeight = useSelector((state: TRootState) => {
-    const result = state.foodDays.days.filter(
-      (el) => el.date === getFormatDate(date)
-    );
-    if (result.length) {
-      if (meal.toLowerCase() === "весь день") {
-        const res = [] as { id: number; weight: number }[];
-        const uniqIds = new Set([...result[0].dayFood.map((el) => el.food.id)]);
-
-        Array.from(uniqIds).forEach((id) => {
-          const itemByIdWeight = result[0].dayFood
-            .filter((item) => item.food.id === id)
-            .reduce((a, el) => a + el.weight, 0);
-          res.push({ id, weight: itemByIdWeight });
-        });
-        return res;
-      }
-      return result[0].dayFood
-        .filter((item) => item.meal === meal)
-        .map((el) => {
-          return { id: el.food.id, weight: el.weight };
-        });
-    }
-    return undefined;
-  });
-
-  const styleRow = dpOpen ? style.row + " " + style["row_slide"] : style.row;
-  const styleFront = isFlip
-    ? style.front + " " + style["front_flip"]
-    : style.front;
-  const styleBack = isFlip ? style.back + " " + style["back_flip"] : style.back;
+  useEffect(() => {
+    void dispatch(setDefaultMeal());
+  }, [date]);
 
   useEffect(() => {
     dispatch(clearSelected());
@@ -124,9 +62,8 @@ const MainPage = () => {
 
   const handleDate = (date: Date) => {
     setDate(date);
-    setDpOpen(!dpOpen);
+    setDpOpen(false);
   };
-
   const handleDateClick = () => {
     if (window.innerWidth <= 768) setDpOpen(!dpOpen);
   };
@@ -164,6 +101,12 @@ const MainPage = () => {
     e.preventDefault();
     handleChangeWeightClick();
   };
+
+  const styleRow = dpOpen ? style.row + " " + style["row_slide"] : style.row;
+  const styleFront = isFlip
+    ? style.front + " " + style["front_flip"]
+    : style.front;
+  const styleBack = isFlip ? style.back + " " + style["back_flip"] : style.back;
 
   return (
     <>
