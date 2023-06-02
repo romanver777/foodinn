@@ -1,12 +1,12 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { TRootState } from "../../store/store";
 import {
   clearSelected,
   removeSelected,
   setSelected,
 } from "../../store/food-selected-reducer";
+import * as selectors from "../../store/selectors";
 
 import TableRow from "../table-row/table-row";
 import { TFood } from "../../mocks/food";
@@ -23,8 +23,8 @@ type TProps = {
 
 const TableMainList = ({ food, foodWeight }: TProps) => {
   const dispatch = useDispatch();
-  const meal = useSelector((state: TRootState) => state.meal.activeMeal);
-  const selected = useSelector((state: TRootState) => state.foodSelected.food);
+  const meal = useSelector(selectors.getActiveMealItem);
+  const selected = useSelector(selectors.getSelectedItems);
 
   const getWeight = (id: number) => {
     const result = foodWeight.filter((el) => el.id === id);
