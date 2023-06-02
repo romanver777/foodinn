@@ -92,3 +92,6 @@ export const getDayFoodWeight = (date: string) =>
       return undefined;
     }
   );
+
+export const getMealList = (state: TRootState) => state.meal.mealsList;
+export const getActiveMealItem = (state: TRootState) => state.meal.activeMeal;

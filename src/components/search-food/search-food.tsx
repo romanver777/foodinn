@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { useSelector } from "react-redux";
 import { useAppDispatch, TRootState, TAppDispatch } from "../../store/store";
@@ -10,6 +10,17 @@ import style from "./search-food.module.scss";
 
 import { TFood } from "../../mocks/food";
 
+const getFood = (value: string, list: TFood[]) => {
+  const arr = value.split(" ");
+
+  for (let i = 0; i < arr.length; i++) {
+    list = list.filter((el) =>
+      el.title.toLowerCase().includes(arr[i].toLowerCase())
+    );
+  }
+  return list;
+};
+
 type TProps = {
   isOpen: boolean;
 };
@@ -17,32 +28,20 @@ type TProps = {
 const SearchFood = ({ isOpen }: TProps) => {
   const [lastFood, setLastFood] = useState<TFood[]>([]);
   const [value, setValue] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const dispatch: TAppDispatch = useAppDispatch();
   const foodList = useSelector((state: TRootState) => state.foodBase.food);
   const loading = useSelector((state: TRootState) => state.foodBase.loading);
   const error = useSelector((state: TRootState) => state.foodBase.error);
 
-  const getFood = (value: string, list: TFood[] = foodList) => {
-    const arr = value.split(" ");
-
-    for (let i = 0; i < arr.length; i++) {
-      list = list.filter((el) =>
-        el.title.toLowerCase().includes(arr[i].toLowerCase())
-      );
-    }
-    return list;
-  };
   useEffect(() => {
     if (!isOpen) {
       setValue("");
       setLastFood([]);
     }
+    if (isOpen && !foodList.length) void dispatch(fetchFood());
   }, [isOpen]);
-
-  useEffect(() => {
-    void dispatch(fetchFood());
-  }, []);
 
   useEffect(() => {
     if (value.trim().length > 1) setLastFood(getFood(value, foodList));
@@ -52,7 +51,10 @@ const SearchFood = ({ isOpen }: TProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
-  const handleClickReset = () => setValue("");
+  const handleClickReset = () => {
+    setValue("");
+    inputRef.current?.focus();
+  };
 
   return (
     <>
@@ -63,6 +65,7 @@ const SearchFood = ({ isOpen }: TProps) => {
           className={style.input}
           onChange={handleChange}
           value={value}
+          ref={inputRef}
         />
         <button className={style["reset-btn"]} onClick={handleClickReset}>
           <img src={crossIcon} className={style["cross-icon"]} />

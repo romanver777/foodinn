@@ -1,14 +1,15 @@
 import React from "react";
+
 import { useDispatch, useSelector } from "react-redux";
-import { TRootState } from "../../store/store";
 import { setMeal } from "../../store/meal-reducer";
+import * as selectors from "../../store/selectors";
 
 import style from "./meal-list.module.scss";
 
 const MealList = () => {
   const dispatch = useDispatch();
-  const list = useSelector((state: TRootState) => state.meal.mealsList);
-  const activeItem = useSelector((state: TRootState) => state.meal.activeMeal);
+  const list = useSelector(selectors.getMealList);
+  const activeItem = useSelector(selectors.getActiveMealItem);
 
   return (
     <div className={style["meal-list"]}>
