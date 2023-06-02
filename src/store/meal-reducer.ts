@@ -19,8 +19,11 @@ export const mealSlice = createSlice({
     setMeal: (state, action: PayloadAction<string>) => {
       state.activeMeal = action.payload;
     },
+    setDefaultMeal: (state) => {
+      state.activeMeal = state.mealsList[0];
+    },
   },
 });
 
-export const { setMeal } = mealSlice.actions;
+export const { setMeal, setDefaultMeal } = mealSlice.actions;
 export default mealSlice.reducer;

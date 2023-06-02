@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TFood } from "../mocks/food";
 
-type TMealFood = {
+export type TMealFood = {
   meal: string;
   food: TFood;
   weight: number;
