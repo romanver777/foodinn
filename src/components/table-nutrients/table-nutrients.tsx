@@ -20,7 +20,7 @@ const getFormatDate = (date: Date) => {
 
 type TFoodWeight = {
   id: number;
-  weight: number;
+  weight: number | null;
 };
 
 type TProps = {

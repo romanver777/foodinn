@@ -40,7 +40,10 @@ const CardNutrientsList = ({ date }: TProps) => {
       Array.from(uniqIds).forEach((id) => {
         const itemByIdWeight = result[0].dayFood
           .filter((item) => item.food.id === id)
-          .reduce((a, el) => a + el.weight, 0);
+          .reduce((a, el) => {
+            const weight = el.weight ? el.weight : 0;
+            return a + weight;
+          }, 0);
         res.push({ id, weight: itemByIdWeight });
       });
       return res;

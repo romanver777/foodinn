@@ -14,7 +14,7 @@ const getKkal = (p: number, f: number, c: number) => (p + c) * 4 + f * 9;
 
 type TProps = {
   food: TFood;
-  weight?: number;
+  weight?: number | null;
   isActive: boolean;
   onHandleClick: (food: TFood) => void;
   allDayMeal: boolean;
@@ -28,18 +28,25 @@ const TableRow = ({
   onHandleClick,
   allDayMeal,
 }: TProps) => {
-  const foodWeight = weight === undefined ? food.portion : weight;
+  const foodWeight =
+    weight === undefined ? food.portion : weight === null ? 0 : weight;
   const prot =
     weight === undefined
       ? food.prot
+      : weight === null
+      ? 0
       : getFixed((foodWeight * food.prot) / food.portion);
   const fat =
     weight === undefined
       ? food.fat
+      : weight === null
+      ? 0
       : getFixed((foodWeight * food.fat) / food.portion);
   const carbs =
     weight === undefined
       ? food.carbs
+      : weight === null
+      ? 0
       : getFixed((foodWeight * food.carbs) / food.portion);
   const kkal = getFixed(getKkal(prot, fat, carbs));
 

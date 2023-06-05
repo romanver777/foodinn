@@ -77,7 +77,10 @@ export const getDayFoodWeight = (date: string) =>
           Array.from(uniqIds).forEach((id) => {
             const weightById = allDayFood
               .filter((item) => item.food.id === id)
-              .reduce((a, el) => a + el.weight, 0);
+              .reduce((a, el) => {
+                const weight = el.weight ? el.weight : 0;
+                return a + weight;
+              }, 0);
 
             result.push({ id, weight: weightById });
           });

@@ -13,7 +13,7 @@ import { TFood } from "../../mocks/food";
 
 type TFoodWeight = {
   id: number;
-  weight: number;
+  weight: number | null;
 };
 
 type TProps = {
@@ -24,6 +24,7 @@ type TProps = {
 const TableMainList = ({ food, foodWeight }: TProps) => {
   const dispatch = useDispatch();
   const meal = useSelector(selectors.getActiveMealItem);
+  const allDayMeal = useSelector(selectors.getAllDayMealName);
   const selected = useSelector(selectors.getSelectedItems);
 
   const getWeight = (id: number) => {
@@ -32,15 +33,15 @@ const TableMainList = ({ food, foodWeight }: TProps) => {
   };
 
   const handleClick = (food: TFood) => {
-    if (meal.toLowerCase() !== "весь день") {
+    if (meal.toLowerCase() !== allDayMeal.toLowerCase()) {
       if (!selected.length) {
-        dispatch(setSelected({ meal, food, weight: 0 }));
+        dispatch(setSelected({ meal, food, weight: null }));
       } else {
         if (selected.filter((item) => item.food.id === food.id).length) {
-          dispatch(removeSelected({ meal, food, weight: 0 }));
+          dispatch(removeSelected({ meal, food, weight: null }));
         } else {
           dispatch(clearSelected());
-          dispatch(setSelected({ meal, food, weight: 0 }));
+          dispatch(setSelected({ meal, food, weight: null }));
         }
       }
     }
@@ -62,7 +63,7 @@ const TableMainList = ({ food, foodWeight }: TProps) => {
             isActive={active}
             onHandleClick={handleClick}
             key={item.id}
-            allDayMeal={meal.toLowerCase() === "весь день"}
+            allDayMeal={meal.toLowerCase() === allDayMeal.toLowerCase()}
           />
         );
       })}

@@ -36,7 +36,7 @@ const SearchFood = ({ isOpen }: TProps) => {
   const error = useSelector((state: TRootState) => state.foodBase.error);
 
   useEffect(() => {
-    if (!isOpen) {
+    if (!isOpen && value) {
       setValue("");
       setLastFood([]);
     }
