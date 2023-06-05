@@ -9,7 +9,7 @@
   box-shadow: 0px 3px 10px -5px $shadow;
   backdrop-filter: blur(3px);
   transition: 0.5s;
-  z-index: 2;
+  z-index: 1;
 
   @media screen and (max-width: $width-s) {
     min-height: 55px;
@@ -26,12 +26,15 @@
 
   @media screen and (max-width: $width-m) {
     padding-right: 25px;
+    padding: 0 25px;
   }
   @media screen and (max-width: $width-s) {
     padding-right: 12px;
+    padding: 0 12px;
   }
   @media screen and (max-width: $width-xs) {
     padding-right: 7px;
+    padding: 0 7px;
   }
 }
 .wrapper {
@@ -40,7 +43,7 @@
   transform: translateX(0);
 
   @media screen and (max-width: $width-m) {
-    transform: translateX(-20px);
+    // transform: translateX(-20px);
   }
 }
 .burger-btn {
