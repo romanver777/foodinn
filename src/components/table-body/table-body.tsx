@@ -8,7 +8,7 @@ import { TFood } from "../../mocks/food";
 
 type TFoodWeight = {
   id: number;
-  weight: number;
+  weight: number | null;
 };
 
 type TTableBody = {

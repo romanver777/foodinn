@@ -4,7 +4,7 @@ import { TFood } from "../mocks/food";
 export type TMealFood = {
   meal: string;
   food: TFood;
-  weight: number;
+  weight: number | null;
 };
 
 type TDayFood = {

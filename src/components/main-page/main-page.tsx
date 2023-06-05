@@ -32,7 +32,7 @@ const MainPage = () => {
   const [date, setDate] = useState(new Date());
   const [dpOpen, setDpOpen] = useState(false);
   const [isFlip, setIsFlip] = useState(false);
-  const [value, setValue] = useState<number | string>(0);
+  const [value, setValue] = useState<number | string>("0");
 
   const dispatch = useDispatch();
   const selected = useSelector(selectors.getSelectedItems);
@@ -52,11 +52,11 @@ const MainPage = () => {
   }, [meal, dpOpen]);
 
   useEffect(() => {
-    if (selected.length) {
+    if (selected.length && selected[0].weight !== null) {
       dispatch(removeDayFood({ date: getFormatDate(date), food: selected }));
       dispatch(setDayFood({ date: getFormatDate(date), dayFood: selected }));
       dispatch(clearSelected());
-      setValue(0);
+      setValue("");
     }
   }, [selectedWeight]);
 
@@ -93,7 +93,7 @@ const MainPage = () => {
     dispatch(clearSelected());
   };
   const handleChangeWeightClick = () => {
-    if (value !== selected[0].weight) {
+    if (value) {
       dispatch(setWeightSelected(+value));
     }
   };
@@ -205,9 +205,8 @@ const MainPage = () => {
                   type="number"
                   name="weight"
                   value={value}
-                  onChange={(e) => setValue(+e.target.value)}
+                  onChange={(e) => setValue(e.target.value)}
                   onFocus={() => setValue("")}
-                  onBlur={() => setValue(0)}
                   className={style.in}
                 />
               </form>

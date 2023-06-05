@@ -4,7 +4,7 @@ import { TFood } from "../mocks/food";
 type TPayload = {
   meal: string;
   food: TFood;
-  weight: number;
+  weight: number | null;
 };
 
 export interface IFoodSelectedInitialState {
