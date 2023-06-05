@@ -3,7 +3,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 
 import Navbar from "../navbar/navbar";
 import Sidebar from "../sidebar/sidebar";
-import Footer from "../footer/footer";
 
 import routes from "../../routes/routes";
 import style from "./app.module.scss";
@@ -24,10 +23,7 @@ const App = () => {
   };
 
   const handleSidebarOpen = () => setIsOpenSb(!isOpenSb);
-
-  const styleMainPanel = isOpenSb
-    ? style["main-panel"] + " " + style["main-panel_sidebar-open"]
-    : style["main-panel"];
+  const styleMainPanel = style["main-panel"];
   const styleContent = isOpenSb
     ? style.content + " " + style["content_sidebar-open"]
     : style.content;
@@ -38,6 +34,7 @@ const App = () => {
         isOpen={isOpenSb}
         routes={routes}
         activePage={location.pathname.slice(1)}
+        onClickHandle={handleSidebarOpen}
       />
       <main className={styleMainPanel}>
         <Navbar

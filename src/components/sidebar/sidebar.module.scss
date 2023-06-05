@@ -7,38 +7,74 @@
   border-right: 1px dotted $gray;
   transition: 0.5s ease-in-out;
   transform: translateX(0);
-  z-index: 1;
+  z-index: 2;
+  background-color: $bg-main-panel-color;
 
   @media screen and (max-width: $width-m) {
     transform: translateX(-260px);
   }
 
-  &:after{
+  &:after {
     content: "";
     position: absolute;
-    top: 70px;
+    top: 0;
     left: 260px;
     width: 0;
     height: 100vh;
     transition: 0.5s ease-in-out;
   }
 }
-.sidebar_open{
-  z-index: 1;
-
-  &:after{
+.sidebar_open {
+  &:after {
     content: "";
     position: absolute;
     top: 70px;
+    top: 0;
     left: 260px;
     width: 100vw;
     height: 100vh;
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(5px);
     transition: 0.5s ease-in-out;
   }
-    @media screen and (max-width: $width-m) {
-        transform: translateX(0);
-      }
+  @media screen and (max-width: $width-m) {
+    transform: translateX(0);
+  }
+}
+.burger-btn {
+  position: absolute;
+  top: 15px;
+  left: 265px;
+  width: 40px;
+  height: 40px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.5s;
+  z-index: 2;
+
+  &:hover {
+    border-radius: 9px;
+    background-color: $gray-hover-light;
+    transition: 0.3s;
+  }
+
+  @media screen and (max-width: $width-s) {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+.cross-icon {
+  width: 18px;
+  height: auto;
+  opacity: 0.4;
+}
+.burger-btn_visible{
+  display: flex;
 }
 .logo-wrapper {
   height: 70px;
@@ -82,7 +118,7 @@
   transition: 0.3s;
 
   &:hover {
-    background-color: $bg-main-panel-color;
+    background-color: $gray-hover-light;
     cursor: pointer;
     border-radius: 3px;
     opacity: 1;
@@ -125,9 +161,9 @@
   }
   @each $name, $url in $icons {
     &_icon-#{$name} {
-        &::before {
-            background-image: url($url);
-          }
+      &::before {
+        background-image: url($url);
+      }
     }
   }
 }

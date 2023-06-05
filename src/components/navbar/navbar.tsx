@@ -1,7 +1,6 @@
 import React from "react";
 
 import burgerIcon from "../../style/icons/burger.svg";
-import crossIcon from "../../style/icons/cross.svg";
 import bellIcon from "../../style/icons/bell.svg";
 import userIcon from "../../style/icons/user.svg";
 
@@ -19,11 +18,7 @@ const Navbar = ({ title, isOpenSb, onClickHandle }: TProps) => {
       <div className={style.container}>
         <div className={style.wrapper}>
           <button className={style["burger-btn"]} onClick={onClickHandle}>
-            {isOpenSb ? (
-              <img src={crossIcon} className={style["cross-icon"]} />
-            ) : (
-              <img src={burgerIcon} className={style["burger-icon"]} />
-            )}
+            <img src={burgerIcon} className={style["burger-icon"]} />
           </button>
           <title className={style.title}>{title}</title>
         </div>
