@@ -1,14 +1,19 @@
 module.exports = {
   verbose: true,
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
-  // moduleNameMapper: {
-  //   '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-  //     '<rootDir>/src/__mocks__/fileMock.ts',
-  //   '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.ts',
-  // },
-  // setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-  // collectCoverageFrom: ['**/*.{ts,tsx}', '!**/*.d.ts', '!**/node_modules/**', '!**/vendor/**'],
+  clearMocks: true,
+  coverageDirectory: "coverage",
+  preset: "ts-jest",
+  testEnvironment: "jest-environment-jsdom",
+  setupFilesAfterEnv: ["./setupTests.ts"],
+  moduleNameMapper: {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+      "<rootDir>/__mocks__/fileMock.js",
+    "\\.module\\.scss$": "identity-obj-proxy",
+    "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
+  },
+  transform: {
+    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+  },
   coverageThreshold: {
     global: {
       branches: 100,
