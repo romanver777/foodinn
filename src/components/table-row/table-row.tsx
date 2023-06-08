@@ -3,16 +3,16 @@ import React from "react";
 import style from "./table-row.module.scss";
 import { TFood } from "../../mocks/food";
 
-const getFixed = (number: number) => {
+export const getFixed = (number: number) => {
   const fixed = number.toFixed(1);
   if (fixed[fixed.length - 1] === "0") {
     return +number.toFixed();
   }
   return +fixed;
 };
-const getKkal = (p: number, f: number, c: number) => (p + c) * 4 + f * 9;
+export const getKkal = (p: number, f: number, c: number) => (p + c) * 4 + f * 9;
 
-type TProps = {
+export type TProps = {
   food: TFood;
   weight?: number | null;
   isActive: boolean;
