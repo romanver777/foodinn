@@ -39,7 +39,6 @@ const App = () => {
       <main className={styleMainPanel}>
         <Navbar
           title={getPageName(location.pathname.slice(1))}
-          isOpenSb={isOpenSb}
           onClickHandle={handleSidebarOpen}
         />
         <div className={styleContent}>
