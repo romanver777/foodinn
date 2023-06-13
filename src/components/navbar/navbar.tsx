@@ -8,11 +8,10 @@ import style from "./navbar.module.scss";
 
 type TProps = {
   title: string;
-  isOpenSb: boolean;
   onClickHandle: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Navbar = ({ title, isOpenSb, onClickHandle }: TProps) => {
+const Navbar = ({ title, onClickHandle }: TProps) => {
   return (
     <header className={style.header}>
       <div className={style.container}>
