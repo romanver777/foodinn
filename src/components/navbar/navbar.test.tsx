@@ -27,4 +27,19 @@ describe("NavBar", () => {
     fireEvent.click(btns[0]);
     expect(props.onClickHandle).toBeCalledTimes(1);
   });
+
+  it("renders menu and icon button with display:none", () => {
+    const { container } = render(<NavBar {...props} />);
+    const style = document.createElement("style");
+    style.innerHTML = `
+          .burger-btn {
+            display: none;
+          }
+        `;
+    document.body.appendChild(style);
+    document.body.appendChild(container);
+
+    expect(container.querySelector(".burger-btn")).not.toBeVisible();
+    expect(container.querySelector(".burger-icon")).not.toBeVisible();
+  });
 });
