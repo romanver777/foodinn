@@ -36,6 +36,14 @@
   text-transform: uppercase;
   color: #264653;
 }
+.react-datepicker__day--highlighted {
+  border: none;
+  background-color: transparent;
+  position: relative;
+}
+.react-datepicker__day--highlighted:hover {
+  background-color: #f0f0f0;
+}
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected {
   border-radius: 9px;
@@ -52,4 +60,20 @@
 }
 .react-datepicker__day--outside-month {
   color: rgba(38, 70, 83, 0.5);
+}
+.react-datepicker__day--highlighted:before {
+  position: absolute;
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #2a9d8f;
+  top: 20%;
+  right: 20%;
+}
+@media screen and (max-width: 1200px) {
+  .react-datepicker__day--highlighted:before {
+    top: 10%;
+    right: 10%;
+  }
 }
