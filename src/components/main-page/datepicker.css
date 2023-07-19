@@ -28,6 +28,18 @@
     line-height: 1.8rem;
   }
 }
+@media screen and (max-width: 768px) {
+  .react-datepicker__day,
+  .react-datepicker__day-name {
+    width: 2.5rem;
+  }
+}
+@media screen and (max-width: 370px) {
+  .react-datepicker__day,
+  .react-datepicker__day-name {
+    width: 1.8rem;
+  }
+}
 .react-datepicker__day:hover {
   border-radius: 9px;
 }

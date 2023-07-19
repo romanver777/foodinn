@@ -18,8 +18,8 @@
   }
 }
 .content {
-  padding: 0 15px 30px;
-  margin-top: 95px;
+  padding: 0 15px 15px;
+  margin-top: 90px;
   position: relative;
 
   @media screen and (max-width: $width-m) {
@@ -41,5 +41,9 @@
 
   @media screen and (max-width: $width-xs) {
     padding: 0 10px 10px;
+  }
+  
+  @media screen and (max-width: 400px) {
+    margin-top: 75px;
   }
 }
