@@ -161,3 +161,24 @@ export const getNutrients = (date: string) =>
       ];
     }
   );
+
+export const getDaysDates = (state: TRootState) =>
+  state.foodDays.days.map((day) => day.date);
+
+export const getDates = (date: Date) =>
+  createSelector(getDaysDates, (dates) => {
+    const currMonth = date.getMonth() + 1;
+    const fromMonth = currMonth - 1;
+    const toMonth = currMonth + 1;
+
+    return dates
+      .filter(
+        (item) => +item.slice(3, 5) >= fromMonth && +item.slice(3, 5) <= toMonth
+      )
+      .map((el) => {
+        const arr = el.split(".");
+        [arr[0], arr[1]] = [arr[1], arr[0]];
+
+        return new Date(arr.join("."));
+      });
+  });

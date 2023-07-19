@@ -42,6 +42,7 @@ const MainPage = () => {
   const dayFoodWeight = useSelector(
     selectors.getDayFoodWeight(getFormatDate(date))
   );
+  const daysDates = useSelector(selectors.getDates(date));
 
   useEffect(() => {
     void dispatch(setDefaultMeal());
@@ -147,6 +148,7 @@ const MainPage = () => {
                 dateFormat="dd.MM"
                 locale={ru}
                 inline
+                highlightDates={daysDates}
               />
             </div>
           </Card>
